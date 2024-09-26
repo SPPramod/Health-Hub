@@ -1,1 +1,2 @@
 # HealthHub
+Health Hub is a user-friendly healthcare platform designed to connect patients with essential medical services. The platform offers features such as appointment scheduling, doctor consultations, personalized health plans, and health-related resources to empower users in managing their well-being efficiently. Built with a focus on accessibility and seamless experience, Health Hub aims to bridge the gap between healthcare providers and patients for improved outcomes.
