@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="BMIC_style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+</head>
+<body>
+
+    <header class="header">
+        <img src="images/logo.png" id="logo" alt="">
+
+        
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="#BMIC">BMI Calculator</a>
+
+            </nav>
+        
+
+    </header>
+    <div id="BMIC">
+    <div class="background-image">
+        <div class="background-content">
+            <div class="bmi-container">
+            <h2>BMI Calculator</h2>
+            <label for="height">Height (in cm):</label>
+            <input type="number" id="height" placeholder="Enter your height">
+
+            <label for="weight">Weight (in kg):</label>
+            <input type="number" id="weight" placeholder="Enter your weight">
+
+            <button onclick="calculateBMI()">Calculate BMI</button>
+
+            <div class="result" id="bmiResult"></div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+    <script>
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const bmi = (weight / (height * height)).toFixed(2);
+            let result = `Your BMI is ${bmi}`;
+
+            if (bmi < 18.5) {
+                result += ' (Underweight)';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                result += ' (Normal weight)';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                result += ' (Overweight)';
+            } else {
+                result += ' (Obesity)';
+            }
+
+            document.getElementById('bmiResult').innerText = result;
+        }
+    </script>
+</body>
+</html>

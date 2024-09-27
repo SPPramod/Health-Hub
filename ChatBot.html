@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+   <link rel="stylesheet" href="chatbot_style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <title>Chatbot</title>
+</head>
+<body>
+
+    <header class="header">
+        <img src="images/logo.png" id="logo" alt="Logo">
+
+        <nav class="navbar">
+            <h1>SAKHI</h1>
+        </nav>
+
+
+    </header>
+
+    <main>
+        <div class="chatbot-container">
+            <div class="chatbot">
+                <div class="chatbot-header">
+                    <h2>Ask Us Anything . . ?</h2>
+                </div>
+                <div class="chatbot-body">
+                    <div class="messages"></div>
+                </div>
+                <div class="chatbot-footer">
+                    <input type="text" id="user-input" placeholder="Type a message...">
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+        
+            if (userInput.trim() === "") return;
+        
+            addMessageToChat('user', userInput);
+            document.getElementById('user-input').value = "";
+        
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessageToChat('bot', data.response);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        
+        function addMessageToChat(sender, message) {
+            const messageContainer = document.querySelector('.messages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.textContent = message;
+            messageContainer.appendChild(messageElement);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+        </script>
+
+</body>    
+</html>

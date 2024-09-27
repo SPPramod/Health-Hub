@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="appointment_style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+</head>
+<body>
+    <header class="header">
+        <img src="images/logo.png" id="logo" alt="">
+
+        <nav class="navbar">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="#appointment">Appointment</a>
+            </nav>
+        </nav>
+
+
+    </header>
+    <div id="appointment">
+    <div class="container">
+        <h2>Enter Your Details</h2>
+        <form id="appointmentForm" action="https://formsubmit.co/e3b519b7b83f639ac59843c135aaf509" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Preferred Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Preferred Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="hospital">Hospital Name:</label>
+                <input type="text" id="hospital" name="hospital" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="profession">Specialization:</label>
+                <select id="profession" name="profession" required>
+                    <option value="">Select Specialist</option>
+                    <option value="Orthopedic">Orthopedic</option>
+                    <option value="Cardio Surgeon">Cardio Surgeon</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Pediatrician">Pediatrician</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                    <option value="General Physician">General Physician</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Hospital Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="_next" value="https://your-domain.com/thank-you.html">
+                <input type="hidden" name="_subject" value="New Appointment Request">
+                <input type="submit" value="Submit">
+            </div>
+            </form>
+    </div>
+            <script>
+                document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+        
+                    // Gather form data
+                    const formData = new FormData(this);
+        
+                    // Send form data to FormSubmit endpoint
+                    fetch('https://formsubmit.co/ajax/e3b519b7b83f639ac59843c135aaf509', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => response.json())
+                      .then(data => {
+                          if (data.success === 'true') {
+                              // Display the success message
+                              document.getElementById('successMessage').style.display = 'block';
+                              
+                              // Optionally, you can reset the form
+                              this.reset();
+                          } else {
+                              alert('Submission failed. Please try again.');
+                          }
+                      }).catch(error => {
+                          console.error('Error:', error);
+                          alert('Submission failed. Please try again.');
+                      });
+                });
+            </script>
+    </body>
+    </html>
